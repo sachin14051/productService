@@ -1,0 +1,54 @@
+<h1 class="bg-info text-white p-3">service intro</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="pname">Product Name</label>
+                <input type="text" class="form-control" #pname>
+            </div>
+            <div class="form-group">
+                <label for="pdesc">Product Description</label>
+                <input type="text" class="form-control" #pdesc>
+            </div>
+            <div class="text-right">
+                <button class="btn btn-primary" (click)="onAddProduct(pname,pdesc)">add products</button>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-6" *ngIf="productsArray.length > 0; else message">
+            <div class="card mb-2" *ngFor="let s of productsArray;">
+                <div class="card-header">
+                       {{s.pname}}
+                </div>
+                <div class="card-body">
+                  <p> {{s.pdesc}}</p> 
+                   <p [ngClass]="{
+                    'bg-info' : s.pstatus,
+                    'p-3'   :s.pstatus,
+                    'text-white'   :s.pstatus
+                   }"> {{s.pstatus}}  </p>
+                </div>
+                <div class="card-footer">
+                   <button class="btn btn-primary mr-4" (click)="OnclickProcess(s.id, status.inprogress)">inprocess</button>
+                   <button class="btn btn-primary mr-4" (click)="OnclickDispatch(s.id, status.dispatch)">dispatch</button>
+                   <button class="btn btn-primary mr-4" (click)="OnclickDelivered(s.id, status.delivered)">delivered</button>
+
+                </div>
+            </div>
+       
+        </div>
+        
+    </div>
+    
+</div>
+
+<ng-template #message >
+    <h4 class="m-5">no product is added</h4>
+</ng-template>
+
+
+
+
